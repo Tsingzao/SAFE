@@ -54,19 +54,13 @@ def update_lambda(i):
     
 # In[3]:
 
-conv = True
-shape = (28,28,1)
-autoencoder, encoder = denoise_autoencoder()
+autoencoder, encoder = denoise_autoencoder(shape)
 autoencoder.compile(optimizer='adadelta', loss='mse')
  
 sample_weights = np.ones((len(x_train),))
 # In[5]:
 
-self_pace = True
-show_result = False
-epochs = 10
-
-for i in range(epochs):
+for i in range(iters):
     
     print("Outer Epoch {}/{}".format(i+1,epochs))
     autoencoder.fit(x_train, x_train, epochs=5, batch_size=256, shuffle=True,
